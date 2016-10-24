@@ -62,7 +62,7 @@ class OwlCarousel(AbstractOwlBase):
         default=settings.DJANGOCMS_OWL_TEMPLATES[0][0], )
 
     def get_style(self):
-        if self.style and self.style != settings.DJANGOCMS_OWL_DEFAULT:
+        if self.style and self.style != 'default':
             return self.style
         return ''
 

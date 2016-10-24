@@ -1,12 +1,10 @@
-from django.utils.safestring import mark_safe
-
 try:
     import json
 except ImportError:
     from django.utils import simplejson as json
 
-import django
 from django.template.loader import select_template
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from cms.plugin_base import CMSPluginBase
@@ -22,6 +20,7 @@ class OwlCarouselPlugin(CMSPluginBase):
     model = OwlCarousel
     allow_children = True
     child_classes = settings.DJANGOCMS_OWL_CHILD_CLASSES
+    render_template = 'djangocms_owl/default.html'
     fieldsets = (
         (None, {
             'fields': (
@@ -56,10 +55,9 @@ class OwlCarouselPlugin(CMSPluginBase):
             ),
         }),
     )
-    TEMPLATE_PATH = 'djangocms_owl/%s.html'
-    render_template = TEMPLATE_PATH % 'default'
 
     def render(self, context, instance, placeholder):
+        context = super(OwlCarouselPlugin, self).render(context, instance, placeholder)
         context.update({
             'INCLUDE_CSS': settings.DJANGOCMS_OWL_INCLUDE_CSS,
             'INCLUDE_JS_OWL': settings.DJANGOCMS_OWL_INCLUDE_JS_OWL,
@@ -67,15 +65,11 @@ class OwlCarouselPlugin(CMSPluginBase):
             'style': instance.get_style(),
             'options': mark_safe(json.dumps(instance.get_owl_options())),
         })
-
         return context
 
-    def get_render_template(self, context, instance, placeholder):
-        template = select_template((
-            self.TEMPLATE_PATH % instance.template,
-            self.TEMPLATE_PATH % 'default')
-        )
-        return template
+    @staticmethod
+    def get_render_template(context, instance, placeholder):
+        return instance.template + '.html'
 
 
 plugin_pool.register_plugin(OwlCarouselPlugin)

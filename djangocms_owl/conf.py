@@ -9,17 +9,17 @@ from appconf import AppConf
 class OwlConf(AppConf):
     MODULE = _('Generic')
 
-    DEFAULT = 'default'
-
-    CHILD_CLASSES = ()
-
-    STYLES = (
-        (DEFAULT, _('Default')),
-    )
+    TEMPLATE_DEFAULT = 'djangocms_owl/default'
 
     TEMPLATES = (
-        (DEFAULT, _('Default')),
+        (TEMPLATE_DEFAULT, _('Default')),
     )
+
+    STYLES = (
+        ('default', _('Default')),
+    )
+
+    CHILD_CLASSES = ()
 
     INCLUDE_CSS = True
 
