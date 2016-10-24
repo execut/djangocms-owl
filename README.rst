@@ -30,17 +30,6 @@ Add Djangocms\_owl to INSTALLED\_APPS
         ...
     )
 
-Django 1.6 and/or South users will need to add the following to ensure
-migration compatibility.
-
-.. code:: python
-
-    SOUTH_MIGRATION_MODULES = {
-        ...
-        'djangocms_owl': 'djangocms_owl.south_migrations',
-        ...
-    }
-
 **Owl Carousel** has a dependency on JQuery `Docs`_ that is not
 currently included within this package. Add a copy will need adding to a
 template such as the base.html.
@@ -142,6 +131,9 @@ Contributions
 
 History
 -------
+
+**0.1.9** WIP
+- Removed South migrations
 
 **0.1.8** (2016-04-08)
 - Disabled responsive modes by default, to respect the items option. Options can be overridden in the extra field.
