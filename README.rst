@@ -134,6 +134,9 @@ History
 
 **0.1.9** WIP
 - Removed South migrations
+- Using the get_render_template method on the plugin
+- Bumping min CMS version to 3.2.3 + Django version to 1.8.1
+
 
 **0.1.8** (2016-04-08)
 - Disabled responsive modes by default, to respect the items option. Options can be overridden in the extra field.

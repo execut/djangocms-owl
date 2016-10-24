@@ -60,17 +60,6 @@ class OwlCarouselPlugin(CMSPluginBase):
     render_template = TEMPLATE_PATH % 'default'
 
     def render(self, context, instance, placeholder):
-        template = select_template((
-            self.TEMPLATE_PATH % instance.template,
-            self.TEMPLATE_PATH % 'default')
-        )
-
-        if django.VERSION[1] >= 8:
-            self.render_template = template.template
-        else:
-            self.render_template = template
-
-        context = super(OwlCarouselPlugin, self).render(context, instance, placeholder)
         context.update({
             'INCLUDE_CSS': settings.DJANGOCMS_OWL_INCLUDE_CSS,
             'INCLUDE_JS_OWL': settings.DJANGOCMS_OWL_INCLUDE_JS_OWL,
@@ -80,6 +69,13 @@ class OwlCarouselPlugin(CMSPluginBase):
         })
 
         return context
+
+    def get_render_template(self, context, instance, placeholder):
+        template = select_template((
+            self.TEMPLATE_PATH % instance.template,
+            self.TEMPLATE_PATH % 'default')
+        )
+        return template
 
 
 plugin_pool.register_plugin(OwlCarouselPlugin)
