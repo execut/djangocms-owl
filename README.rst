@@ -132,7 +132,9 @@ Contributions
 History
 -------
 
-**0.1.9** WIP
+**0.1.10 / 0.1.11** BUG Fixes (2016-10-24)
+
+**0.1.9** (2016-10-24)
 
 - Removed South migrations
 - Using the get_render_template method on the plugin
